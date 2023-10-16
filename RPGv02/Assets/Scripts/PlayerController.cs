@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviourPun
     public int curHP;
     public int maxHP;
     public bool dead;
+    
 
     [Header("Attack")]
     public int damage;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviourPun
     public Player photonPlayer;
     public SpriteRenderer sr;
     public Animator weaponAnim;
+    public HeaderInfo headerInfo;
 
     // local player
     public static PlayerController me;
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviourPun
         GameManager.instance.players[id - 1] = this;
 
         // initialize the health bar
+        headerInfo.Initialize(player.NickName, maxHP);
 
         if (player.IsLocal)
             me = this;
@@ -142,6 +145,7 @@ public class PlayerController : MonoBehaviourPun
         rig.isKinematic = false;
 
         // update the health bar
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHP);
     }
 
     [PunRPC]
@@ -150,6 +154,7 @@ public class PlayerController : MonoBehaviourPun
         curHP = Mathf.Clamp(curHP + amountToHeal, 0, maxHP);
 
         //update the health bar
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHP);
     }
 
     [PunRPC]
