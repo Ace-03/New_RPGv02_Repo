@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviourPun
         playersInGame++;
 
         if (playersInGame == PhotonNetwork.PlayerList.Length)
+        {
+            Debug.Log("Spawning Player");
             SpawnPlayer();
+        }
     }
 
     void Start()
