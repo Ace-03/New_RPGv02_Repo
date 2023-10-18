@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviourPun
         id = player.ActorNumber;
         photonPlayer = player;
 
+        Debug.Log("Player is Initialized");
         GameManager.instance.players[id - 1] = this;
 
         // initialize the health bar
