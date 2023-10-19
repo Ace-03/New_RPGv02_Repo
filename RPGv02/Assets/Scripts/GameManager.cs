@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.Linq;
@@ -10,7 +12,6 @@ public class GameManager : MonoBehaviourPun
     public Transform[] spawnPoints;
     public float respawnTime;
     
-
     private int playersInGame;
 
     // instance
@@ -19,6 +20,12 @@ public class GameManager : MonoBehaviourPun
     void Awake()
     {
         instance = this;    
+    }
+
+    void Start()
+    {
+        players = new PlayerController[PhotonNetwork.PlayerList.Length];
+        photonView.RPC("ImInGame", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -31,13 +38,6 @@ public class GameManager : MonoBehaviourPun
             Debug.Log("Spawning Player");
             SpawnPlayer();
         }
-    }
-
-    void Start()
-    {
-        photonView.RPC("ImInGame", RpcTarget.AllBuffered);
-
-        players = new PlayerController[PhotonNetwork.PlayerList.Length];
     }
 
     void SpawnPlayer()

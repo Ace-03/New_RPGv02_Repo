@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour
 {
     void Update()
     {
-        Debug.Log("Camera was called");
+        //Debug.Log("Camera was called");
+
         // does the player exist?
         if (PlayerController.me != null && !PlayerController.me.dead)
         {
