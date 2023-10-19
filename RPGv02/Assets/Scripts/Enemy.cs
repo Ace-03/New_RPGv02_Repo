@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviourPun
         if (targetPlayer != null)
         {
             // calcualte the distance
-            float dist = Vector3.Distance(transform.position, targetPlayer.transform.position);
+            float dist = Vector2.Distance(transform.position, targetPlayer.transform.position);
 
             // if we're able to attack, do so
             if (dist < attackRange && Time.time - lastAttackTime >= attackRange)
@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviourPun
     // attacks the target player
     void Attack()
     {
+        Debug.Log("ATTACK!");
         lastAttackTime = Time.time;
         targetPlayer.photonView.RPC("TakenDamage", targetPlayer.photonPlayer, damage);
     }
