@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviourPun
         curHP -= damage;
 
         // update the health bar
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHP);
 
         if (curHP <= 0)
             Die();

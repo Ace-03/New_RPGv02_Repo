@@ -210,7 +210,7 @@ MonoBehaviour:
   curHP: 100
   maxHP: 100
   dead: 0
-  damage: 10
+  damage: 25
   attackRange: 1
   attackRate: 0.2
   lastAttackTime: 0
